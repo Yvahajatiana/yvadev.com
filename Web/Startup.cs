@@ -10,6 +10,8 @@ using Yvadev.Infrastructure.EF.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Yvadev.Domain.Contracts;
 using Yvadev.Infrastructure.EF.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Yvadev.Infrastructure.EF.Models;
 
 namespace Yvadev.Web
 {
@@ -29,6 +31,8 @@ namespace Yvadev.Web
             services.AddDbContext<ApplicationContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
