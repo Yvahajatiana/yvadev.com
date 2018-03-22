@@ -12,6 +12,10 @@ namespace Yvadev.Infrastructure.EF.Maps
         {
             entityBuilder.HasKey(t => t.Id);
             entityBuilder.Property(t => t.Content);
+            entityBuilder.Property(t => t.AuthorId);
+            entityBuilder.HasOne(t => t.Post);
+            entityBuilder.Property(t => t.CreationDate);
+            entityBuilder.Property(t => t.ModificationDate);
         }
     }
 }

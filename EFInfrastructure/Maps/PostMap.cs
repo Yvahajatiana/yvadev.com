@@ -13,9 +13,11 @@ namespace Yvadev.Infrastructure.EF.Maps
             entityBuilder.HasKey(t => t.Id);
             entityBuilder.Property(t => t.Title);
             entityBuilder.Property(t => t.Content);
-            entityBuilder.Property(t => t.Author);
+            entityBuilder.Property(t => t.AuthorId);
             entityBuilder.Property(t => t.Tags);
             entityBuilder.HasOne(t => t.Seo);
+            entityBuilder.Property(t => t.CreationDate);
+            entityBuilder.Property(t => t.ModificationDate);
         }
     }
 }

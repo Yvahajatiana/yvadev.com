@@ -29,10 +29,14 @@ namespace Yvadev.Web
         {
             services.AddMvc();
             services.AddDbContext<ApplicationContext>(options
-                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                b => b.MigrationsAssembly("Yvadev.Infrastructure.EF")));
+            services.AddDbContext<IdentityContext>(options
+                => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                b => b.MigrationsAssembly("Yvadev.Infrastructure.EF")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddIdentity<AppUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

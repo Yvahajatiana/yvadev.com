@@ -10,6 +10,6 @@ namespace Yvadev.Domain.Entities
 
         public PublicationStatus IsPublished { get; set; }
 
-        public virtual User Author { get; set; }
+        public virtual int AuthorId { get; set; }
     }
 }

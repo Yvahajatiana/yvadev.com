@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Yvadev.Domain.Entities
 {
-    public class Comment : BaseEntity
+    public class Comment : Publishable
     {
         public virtual Post Post { get; set; }
 

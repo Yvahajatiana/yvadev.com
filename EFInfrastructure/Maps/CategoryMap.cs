@@ -9,6 +9,8 @@
         {
             entityBuilder.HasKey(t => t.Id);
             entityBuilder.Property(t => t.Name);
+            entityBuilder.Property(t => t.CreationDate);
+            entityBuilder.Property(t => t.ModificationDate);
         }
     }
 }
