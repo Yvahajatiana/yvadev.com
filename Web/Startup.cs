@@ -12,6 +12,10 @@ using Yvadev.Domain.Contracts;
 using Yvadev.Infrastructure.EF.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Yvadev.Infrastructure.EF.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using AutoMapper;
 
 namespace Yvadev.Web
 {
@@ -27,7 +31,6 @@ namespace Yvadev.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
             services.AddDbContext<ApplicationContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("Yvadev.Infrastructure.EF")));
@@ -37,6 +40,24 @@ namespace Yvadev.Web
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddCookie()
+                .AddJwtBearer(JwtBearerOptions =>
+                {
+                    JwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateActor = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Token:Issuer"],
+                        ValidAudience = Configuration["Token:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Token:Key"]))
+                    };
+                });
+            services.AddAutoMapper();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +72,8 @@ namespace Yvadev.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseAuthentication();
 
             app.UseStaticFiles();
         }
