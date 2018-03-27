@@ -44,7 +44,16 @@ namespace Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            signInManager.PasswordSignInAsync(model);
+            var result = await signInManager.PasswordSignInAsync(model.UserName,model.Password,model.RememberMe, false);
+
+            if (result.Succeeded)
+            {
+                return Redirect("/" + returnUrl);
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         [HttpPost]
