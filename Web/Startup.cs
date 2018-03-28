@@ -72,10 +72,9 @@ namespace Yvadev.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-            app.UseAuthentication();
-
             app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseMvc();
         }
     }
 }

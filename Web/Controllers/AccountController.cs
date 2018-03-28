@@ -60,7 +60,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            throw new NotImplementedException();
+            await signInManager.SignOutAsync();
+            return Redirect("/");
         }
 
         [HttpGet]

@@ -8,6 +8,7 @@ using Yvadev.Web.Models;
 
 namespace Yvadev.Web.Controllers
 {
+    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -32,6 +33,11 @@ namespace Yvadev.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Test()
+        {
+            return View();
         }
     }
 }
