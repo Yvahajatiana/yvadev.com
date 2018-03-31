@@ -1,5 +1,4 @@
-﻿
-namespace Yvadev.Infrastructure.EF.Contexts
+﻿namespace Yvadev.Infrastructure.EF.Contexts
 {
     using Microsoft.EntityFrameworkCore;
     using Yvadev.Domain.Entities;
@@ -18,6 +17,7 @@ namespace Yvadev.Infrastructure.EF.Contexts
             new PostMap(modelBuilder.Entity<Post>());
             new CategoryMap(modelBuilder.Entity<Category>());
             new SEOMap(modelBuilder.Entity<SEO>());
+            new UserMap(modelBuilder.Entity<User>());
         }
     }
 }

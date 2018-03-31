@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Yvadev.Infrastructure.EF.Models
+﻿namespace Yvadev.Infrastructure.EF.Models
 {
+    using Microsoft.AspNetCore.Identity;
+
     public class AppUser : IdentityUser
     {
     }

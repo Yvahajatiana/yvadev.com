@@ -1,11 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Yvadev.Domain.Entities;
-
-namespace Yvadev.Infrastructure.EF.Maps
+﻿namespace Yvadev.Infrastructure.EF.Maps
 {
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Yvadev.Domain.Entities;
+
     public class PostMap
     {
         public PostMap(EntityTypeBuilder<Post> entityBuilder)
@@ -13,7 +10,7 @@ namespace Yvadev.Infrastructure.EF.Maps
             entityBuilder.HasKey(t => t.Id);
             entityBuilder.Property(t => t.Title);
             entityBuilder.Property(t => t.Content);
-            entityBuilder.Property(t => t.AuthorId);
+            entityBuilder.HasOne(t => t.Author);
             entityBuilder.Property(t => t.Tags);
             entityBuilder.HasOne(t => t.Seo);
             entityBuilder.Property(t => t.CreationDate);

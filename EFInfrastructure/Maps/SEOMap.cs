@@ -1,8 +1,8 @@
-﻿
-namespace Yvadev.Infrastructure.EF.Maps
+﻿namespace Yvadev.Infrastructure.EF.Maps
 {
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using Yvadev.Domain.Entities;
+
     public class SEOMap
     {
         public SEOMap(EntityTypeBuilder<SEO> entityBuilder)
