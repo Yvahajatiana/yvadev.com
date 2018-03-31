@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AutoMapper;
+using Yvadev.Domain.Services;
+using Yvadev.DependencyResolution;
 
 namespace Yvadev.Web
 {
@@ -31,15 +33,20 @@ namespace Yvadev.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*
+             * MIGRATION CMD
+             * dotnet ef migrations add AddUserEntity --context ApplicationContext --startup-project ../Web/Web.csproj
+             */
             services.AddDbContext<ApplicationContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("Yvadev.Infrastructure.EF")));
             services.AddDbContext<IdentityContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly("Yvadev.Infrastructure.EF")));
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
+
+            Resolver.Register(services);
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddCookie()
@@ -72,6 +79,7 @@ namespace Yvadev.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc();

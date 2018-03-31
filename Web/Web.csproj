@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DependancyResolution\DependencyResolution.csproj" />
     <ProjectReference Include="..\EFInfrastructure\Infrastructure.EF.csproj" />
   </ItemGroup>
 
