@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Yvadev.Domain.Contracts;
-using Yvadev.Domain.Entities;
-
-namespace Yvadev.Domain.Services
+﻿namespace Yvadev.Domain.Services
 {
+    using System.Collections.Generic;
+    using Yvadev.Domain.Contracts;
+    using Yvadev.Domain.Entities;
+
     public class CategoryService : ICategoryService
     {
         private readonly IRepository<Category> repository;

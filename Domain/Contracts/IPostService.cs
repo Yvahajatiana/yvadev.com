@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Yvadev.Domain.Entities;
-
-namespace Yvadev.Domain.Contracts
+﻿namespace Yvadev.Domain.Contracts
 {
+    using System.Collections.Generic;
+    using Yvadev.Domain.Entities;
+
     public interface IPostService
     {
         List<Post> GetPosts();

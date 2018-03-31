@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Yvadev.Domain.Entities
+﻿namespace Yvadev.Domain.Entities
 {
+    using System;
+
     public abstract class BaseEntity
     {
         public long Id { get; set; }
