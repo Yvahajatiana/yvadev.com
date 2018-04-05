@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Yvadev.Domain.Contracts;
 using Yvadev.Domain.Entities;
 
-namespace Web.Controllers.Api
+namespace Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Produces("application/json")]
+    [Route("api/category")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;
@@ -16,6 +17,11 @@ namespace Web.Controllers.Api
         public CategoryController(ICategoryService categoryService)
         {
             this.categoryService = categoryService;
+        }
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            return new OkObjectResult("Ca fonctionne");
         }
 
         [HttpGet("")]

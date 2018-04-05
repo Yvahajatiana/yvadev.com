@@ -1,6 +1,8 @@
 ﻿namespace Yvadev.Domain.Contracts
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq.Expressions;
     using Yvadev.Domain.Entities;
 
     public interface IRepository<T> where T : BaseEntity
@@ -10,6 +12,8 @@
         void Add(T Entity);
 
         List<T> GetAll();
+
+        List<T> GetAll(Expression<Func<T, bool>> predicate);
 
         void Update(T Entity);
 

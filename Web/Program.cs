@@ -20,10 +20,7 @@ namespace Yvadev.Web
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
+                .UseStartup<Startup>().UseUrls("http://yvadev.loc:5000")
                 .Build();
     }
 }

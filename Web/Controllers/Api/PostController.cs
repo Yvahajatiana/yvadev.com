@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Yvadev.Domain.Contracts;
 using Yvadev.Domain.Entities;
 
-namespace Web.Controllers.Api
+namespace Web.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     public class PostController : Controller
     {

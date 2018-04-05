@@ -3,6 +3,8 @@
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
     using System.Threading.Tasks;
     using Yvadev.Domain.Contracts;
     using Yvadev.Domain.Entities;
@@ -47,6 +49,11 @@
         {
             if (Entity == null) new ArgumentNullException("Entity");
             await context.SaveChangesAsync();
+        }
+
+        public async Task<List<T>> GetAll(Expression<Func<T, bool>> predicate)
+        {
+            return await entities.Where(predicate).ToListAsync();
         }
     }
 }

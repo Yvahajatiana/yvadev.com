@@ -46,7 +46,12 @@ namespace Yvadev.Web
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
 
-            Resolver.Register(services);
+            //IocResolver.Register(services);
+
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
+            services.AddScoped<IPostService, PostService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddCookie()

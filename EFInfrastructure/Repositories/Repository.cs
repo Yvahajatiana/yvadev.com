@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
     using Yvadev.Domain.Contracts;
     using Yvadev.Domain.Entities;
     using Yvadev.Infrastructure.EF.Contexts;
@@ -52,6 +53,11 @@
         public void SaveChange(T Entity)
         {
             context.SaveChanges();
+        }
+
+        public List<T> GetAll(Expression<Func<T, bool>> predicate)
+        {
+            return entities.Where(predicate).ToList();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿namespace Yvadev.Domain.Contracts
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq.Expressions;
     using System.Threading.Tasks;
     using Yvadev.Domain.Entities;
 
@@ -11,6 +13,8 @@
         Task AddAsync(T Entity);
 
         Task<List<T>> GetAllAsync();
+
+        Task<List<T>> GetAll(Expression<Func<T, bool>> predicate);
 
         Task UpdateAsync(T Entity);
 

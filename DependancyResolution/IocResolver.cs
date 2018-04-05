@@ -5,7 +5,7 @@
     using Yvadev.Domain.Services;
     using Yvadev.Infrastructure.EF.Repositories;
 
-    public static class Resolver
+    public static class IocResolver
     {
         public static void Register(IServiceCollection services)
         {
