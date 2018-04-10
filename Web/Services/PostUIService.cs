@@ -37,17 +37,7 @@ namespace Yvadev.Web.Services
 
         public void UpdatePost(UpdatePostRequestModel model)
         {
-            var post = mapper.Map<Post>(model);
-            var postToUpdate = postService.GetPost(model.Id);
-
-            var seo = mapper.Map<SEO>(model);
-            var author = userService.GetUser(model.Id);
-
-            postToUpdate.Seo = post
-
-
-
-            postService.UpdatePost();
+            new NotImplementedException();
         }
     }
 }
