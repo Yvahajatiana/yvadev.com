@@ -42,15 +42,24 @@ namespace Web.Controllers
         {
             if (!ModelState.IsValid) return BadRequest();
             postUIService.CreatePost(model);
-            return Ok("SUCCESS");
+            return new ObjectResult("Created");
         }
 
         [HttpPut("update")]
-        public IActionResult Update([FromBody] UpdatePostRequestModel model)
+        public IActionResult Update(long id,[FromBody] UpdatePostRequestModel model)
         {
-            if (!ModelState.IsValid) return BadRequest();
-            postUIService.UpdatePost(model);
-            return Ok("SUCCESS");
+            if(model == null || model.Id != id || !ModelState.IsValid) return BadRequest();
+
+            try
+            {
+                postUIService.UpdatePost(model);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+            
+            return new ObjectResult("Updated");
         }
 
         [HttpDelete("{Id}")]

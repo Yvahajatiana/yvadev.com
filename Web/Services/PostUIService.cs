@@ -26,18 +26,19 @@ namespace Yvadev.Web.Services
         public void CreatePost(CreatePostRequestModel model)
         {
             var post = mapper.Map<Post>(model);
-            var seo = mapper.Map<SEO>(model);
             var user = userService.GetUser(model.UserId);
 
             post.Author = user;
-            post.Seo = seo;
 
             postService.CreatePost(post);
         }
 
         public void UpdatePost(UpdatePostRequestModel model)
         {
-            new NotImplementedException();
+            var post = postService.GetPost(model.Id);
+            if (post == null) new KeyNotFoundException();
+
+
         }
     }
 }

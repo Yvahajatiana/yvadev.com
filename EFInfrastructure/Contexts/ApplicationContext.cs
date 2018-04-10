@@ -16,7 +16,6 @@
             base.OnModelCreating(modelBuilder);
             new PostMap(modelBuilder.Entity<Post>());
             new CategoryMap(modelBuilder.Entity<Category>());
-            new SEOMap(modelBuilder.Entity<SEO>());
             new UserMap(modelBuilder.Entity<User>());
         }
     }

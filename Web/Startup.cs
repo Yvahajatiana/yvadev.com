@@ -42,6 +42,7 @@ namespace Yvadev.Web
             /*
              * MIGRATION CMD
              * dotnet ef migrations add AddUserEntity --context ApplicationContext --startup-project ../Web/Web.csproj
+             * dotnet ef database update --context ApplicationContext --startup-project ../Web/Web.csproj
              */
             services.AddDbContext<ApplicationContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
@@ -102,12 +103,7 @@ namespace Yvadev.Web
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvc(routes => 
-            {
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
-            });
+            app.UseMvc();
         }
     }
 }

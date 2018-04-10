@@ -12,9 +12,5 @@ namespace Yvadev.Web.ViewModels
         public string Content { get; set; }
 
         public string Tags { get; set; }
-
-        public string MetaTitle { get; set; }
-
-        public string MetaDescription { get; set; }
     }
 }
