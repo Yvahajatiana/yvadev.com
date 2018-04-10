@@ -18,6 +18,12 @@ using System.Text;
 using AutoMapper;
 using Yvadev.Domain.Services;
 using Yvadev.DependencyResolution;
+using Microsoft.AspNetCore.SpaServices.Webpack;
+using Yvadev.Web.Contracts;
+using Yvadev.Web.Services;
+using Yvadev.Web.ViewModels;
+using Yvadev.Domain.Entities;
+using Yvadev.Web.Automapper;
 
 namespace Yvadev.Web
 {
@@ -52,6 +58,8 @@ namespace Yvadev.Web
             services.AddTransient(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPostUIService, PostUIService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddCookie()
@@ -68,7 +76,12 @@ namespace Yvadev.Web
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Token:Key"]))
                     };
                 });
-            services.AddAutoMapper();
+            var conf = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new AutomapperProfile());
+            });
+            var mapper = conf.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddMvc();
         }
 
@@ -79,15 +92,22 @@ namespace Yvadev.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                //app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions { HotModuleReplacement = true });
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseMvc(routes => 
+            {
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
+            });
         }
     }
 }

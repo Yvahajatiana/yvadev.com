@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Yvadev.Domain.Contracts;
 using Yvadev.Domain.Entities;
+using Yvadev.Web.Contracts;
+using Yvadev.Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -13,10 +15,12 @@ namespace Web.Controllers
     public class PostController : Controller
     {
         private readonly IPostService postService;
+        private readonly IPostUIService postUIService;
 
-        public PostController(IPostService postService)
+        public PostController(IPostService postService, IPostUIService postUIService)
         {
             this.postService = postService;
+            this.postUIService = postUIService;
         }
 
         [HttpGet("")]
@@ -34,19 +38,19 @@ namespace Web.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult Create([FromBody] Post post)
+        public IActionResult Create([FromBody] CreatePostRequestModel model)
         {
             if (!ModelState.IsValid) return BadRequest();
-            postService.CreatePost(post);
-            return Ok();
+            postUIService.CreatePost(model);
+            return Ok("SUCCESS");
         }
 
         [HttpPut("update")]
-        public IActionResult Update([FromBody] Post post)
+        public IActionResult Update([FromBody] UpdatePostRequestModel model)
         {
             if (!ModelState.IsValid) return BadRequest();
-            postService.UpdatePost(post);
-            return Ok();
+            postUIService.UpdatePost(model);
+            return Ok("SUCCESS");
         }
 
         [HttpDelete("{Id}")]

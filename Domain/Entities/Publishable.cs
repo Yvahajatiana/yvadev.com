@@ -4,7 +4,7 @@
 
     public abstract class Publishable : BaseEntity
     {
-        public DateTime PublicationDate { get; set; }
+        public DateTime PublicationDate { get ; set; }
 
         public PublicationStatus IsPublished { get; set; }
 

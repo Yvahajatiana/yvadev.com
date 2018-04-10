@@ -1,5 +1,6 @@
 ﻿namespace Yvadev.Domain.Services
 {
+    using System;
     using System.Collections.Generic;
     using Yvadev.Domain.Contracts;
     using Yvadev.Domain.Entities;
@@ -17,6 +18,7 @@
 
         public void CreatePost(Post post)
         {
+            post.CreationDate = DateTime.UtcNow;
             repository.Add(post);
         }
 

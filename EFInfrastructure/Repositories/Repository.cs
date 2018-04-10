@@ -47,6 +47,7 @@
         public void Update(T Entity)
         {
             if (Entity == null) new ArgumentNullException("Entity");
+            context.Entry(Entity).State = EntityState.Modified;
             context.SaveChanges();
         }
 

@@ -1,5 +1,6 @@
 ﻿namespace Yvadev.Domain.Services
 {
+    using System;
     using System.Collections.Generic;
     using Yvadev.Domain.Contracts;
     using Yvadev.Domain.Entities;
@@ -16,6 +17,7 @@
         }
         public void CreateCategory(Category category)
         {
+            category.CreationDate = DateTime.UtcNow;
             repository.Add(category);
         }
 
